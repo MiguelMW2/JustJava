@@ -7,6 +7,7 @@
 
 package com.example.android.justjava;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -27,7 +29,7 @@ import static android.util.Log.v;
  */
 public class MainActivity extends AppCompatActivity {
 
-    int quantity = 0;
+    int quantity = 1;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +37,30 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+    /**
+     * This method is called when the plus button is clicked.
+     */
     public void increment(View view) {
+        if (quantity == 100) {
+            // Show an error message as a toast
+            Toast.makeText(this, "You cannot have more than 100 coffee", Toast.LENGTH_SHORT).show();
+            // Exit this method early because there's nothing left to do
+            return;
+        }
         quantity = quantity + 1;
         displayQuantity(quantity);
     }
 
+    /**
+     * This method is called when the minus button is clicked.
+     */
     public void decrement(View view) {
+        if (quantity == 1) {
+            // Show an error message as a toast
+            Toast.makeText(this, "You cannot have less than 1 coffee", Toast.LENGTH_SHORT).show();
+            // Exit this method early because there's nothing left to do
+            return;
+        }
         quantity = quantity - 1;
         displayQuantity(quantity);
     }
@@ -76,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         CheckBox chocolateCheckBox = (CheckBox) findViewById(R.id.has_chocolate);
         boolean hasChocolate = chocolateCheckBox.isChecked();
 
-        int price = calculatePrice();
+        int price = calculatePrice(hasWhippedCream, hasChocolate);
         String priceMessage = createOrderSummary(name, price, hasWhippedCream, hasChocolate);
         displayMessage(priceMessage);
     }
@@ -84,24 +104,27 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Calculates the price of the order.
      *
-     * @param quantity    is the number of cups of coffee ordered
-     * @param pricePerCup is the price of one cup of coffee
-     */
-    private int calculatePrice(int quantity, int pricePerCup) {
-        return quantity * pricePerCup;
-    }
-
-    private void calculatePrice(int quantity) {
-        int price = quantity * 5;
-    }
-
-    /**
-     * Calculates the price of the order.
+     * @param addWhippedCream is whether or not the user wants whipped cream topping
+     * @param addChocolate is whether or not the user wants chocolate topping
      *
      * @return total price
      */
-    private int calculatePrice() {
-        return quantity * 5;
+    private int calculatePrice(boolean addWhippedCream, boolean addChocolate) {
+        // Price of 1 cup of coffee
+        int basePrice = 5;
+
+        //Add $1 if the user wants whipped cream
+        if (addWhippedCream) {
+            basePrice += 1;
+        }
+
+        //Add $2 if the user wants chocolate
+        if (addChocolate) {
+            basePrice += 2;
+        }
+
+        // Calculate the total order price by multiplying by quantity
+        return quantity * basePrice;
     }
 
     /**
