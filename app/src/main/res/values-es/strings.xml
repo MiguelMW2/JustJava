@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Activity main strings -->
+    <string name="app_name">Just Java</string>
+    <string name="name">Nombre</string>
+    <string name="toppings">Ingredientes</string>
+    <string name="whipped_cream">Crema batida</string>
+    <string name="chocolate">Chocolate</string>
+    <string name="quantity">Cantidad</string>
+    <string name="initial_quantity_value">2</string>
+    <string name="order">ORDENAR</string>
+
+    <!-- Email strings -->
+    <string name="order_summary_email_subject">Just Java orden para: <xliff:g example="Amy" id="name">%s</xliff:g></string>
+    <string name="order_summary_name">Nombre: <xliff:g example="Amy" id="name">%s</xliff:g></string>
+    <string name="order_summary_whipped_cream">¿Agregar crema batida? <xliff:g example="true" id="whipped_cream">%b</xliff:g></string>
+    <string name="order_summary_chocolate">¿Agregar chocolate? <xliff:g example="true" id="chocolate">%b</xliff:g></string>
+    <string name="order_summary_quantity">Cantidad: <xliff:g example="1" id="quantity">%d</xliff:g></string>
+    <string name="order_summary_price">Total: $<xliff:g example="10" id="price">%d</xliff:g></string>
+    <string name="thank_you">Gracias!</string>
+
+    <!-- Toast strings -->
+    <string name="toast_less_1">No puedes comprar menos de un café</string>
+    <string name="toast_more_100">No puedes comprar más de 100 cafés</string>
+</resources>
